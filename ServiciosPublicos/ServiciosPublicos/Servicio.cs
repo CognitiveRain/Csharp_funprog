@@ -1,17 +1,19 @@
 ﻿
 namespace ServiciosPublicos
 {
-    class Servicio
+    public class Servicio
     {
         //Propiedades
         public string Nombre { get; set; }
         public float Consumo { get; set; }
 
         //Constructor de la clase
-        public Servicio()
+        public Servicio(string nombre, float consumo)
         {
-            Nombre = "";
-            Consumo = 0;
+            this.Nombre = nombre;
+            this.Consumo = consumo;
+            //Nombre = "";
+            //Consumo = 0;
         }        
     }
 }

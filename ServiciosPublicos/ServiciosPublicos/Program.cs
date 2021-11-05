@@ -1,16 +1,17 @@
 ﻿using System;
+using System.Globalization;
 
 namespace ServiciosPublicos
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+        static public void Main() //string[] args
         {
             Console.WriteLine("Programa para simular el consumo de servicios publicos");
             Console.WriteLine("Se Generarán 1000 servicios de manera aleatoria");
 
-            string[] nombresServicios = new string[] { "Energía", "Acueducto", "Gas", "Telefonía local", "Internet" };
-            Servicio[] losServicios = new Servicio[1000];
+           string[] nombresServicios = new string[] { "Energía", "Acueducto", "Gas", "Telefonía local", "Internet" };
+           Servicio[] losServicios = new Servicio[1000];
             int i;
 
             //Inicializamos el arreglo con valores aleatorios para el nombre y el consumo
@@ -18,9 +19,13 @@ namespace ServiciosPublicos
 
             for (i = 0; i < losServicios.Length; i++)
             {
-                losServicios[i] = new Servicio();
-                losServicios[i].Nombre = nombresServicios[aleatorio.Next(nombresServicios.Length)];
-                losServicios[i].Consumo = aleatorio.Next(10000, 100001); //Se le suma 1 al limite superior para incluir el valor máximo
+                String nombreAleatorio = nombresServicios[aleatorio.Next(nombresServicios.Length)];
+                float consumoAleatorio = aleatorio.Next(10000, 100001);
+
+                losServicios[i] = new Servicio(nombreAleatorio, consumoAleatorio);
+
+                //losServicios[i].Nombre = nombresServicios[aleatorio.Next(nombresServicios.Length)];
+                //losServicios[i].Consumo = aleatorio.Next(10000, 100001); //Se le suma 1 al limite superior para incluir el valor máximo
 
                 Console.WriteLine($"Posicion {i + 1}, Servicio {losServicios[i].Nombre}, consumo: {losServicios[i].Consumo} ");
             }
@@ -51,7 +56,7 @@ namespace ServiciosPublicos
         /// <param name="arregloServicios">El arreglo con los servicios</param>
         /// <param name="arregloNombres">El arreglo con el nombre de los servicios</param>
         /// <returns>arreglo con el consumo máximo para cada tipo de servicio</returns>
-        static float[] BuscaMaximoConsumo(Servicio[] arregloServicios, string[] arregloNombres)
+        static public float[] BuscaMaximoConsumo(Servicio[] arregloServicios, string[] arregloNombres)
         {
             float[] maximos = new float[arregloNombres.Length];
             int i;
@@ -105,7 +110,7 @@ namespace ServiciosPublicos
         /// <param name="arregloServicios">El arreglo con los servicios</param>
         /// <param name="arregloNombres">El arreglo con el nombre de los servicios</param>
         /// <returns>arreglo con el consumo promedio para cada tipo de servicio</returns>
-        static float[] CalculaPromedios(Servicio[] arregloServicios, string[] arregloNombres)
+        static public float[] CalculaPromedios(Servicio[] arregloServicios, string[] arregloNombres)
         {
             float[] promedios = new float[arregloNombres.Length];
             int[] totales = CalculaTotales(arregloServicios, arregloNombres);
@@ -137,7 +142,7 @@ namespace ServiciosPublicos
         /// <param name="arregloServicios">El arreglo de servicios</param>
         /// <param name="arregloNombres">los nombres de servicios válidos</param>
         /// <returns>Arreglo de valores con la cantidad por cada servicio</returns>
-        static int[] CalculaTotales(Servicio[] arregloServicios, string[] arregloNombres)
+        static public int[] CalculaTotales(Servicio[] arregloServicios, string[] arregloNombres)
         {
             int[] totales = new int[arregloNombres.Length];
             int i;
